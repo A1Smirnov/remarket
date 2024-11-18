@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import Product from '../models/Product';
+import { IUser } from '../models/User';
 
 const router = express.Router();
 
@@ -15,27 +16,40 @@ router.get('/', async (req: Request, res: Response) => {
 
 // POST /api/products
 router.post('/', async (req: Request, res: Response) => {
-  try {
-    const product = new Product(req.body);
-    const savedProduct = await product.save();
-    res.status(201).json(savedProduct);
-  } catch (err) {
-    res.status(400).json({ message: 'Error creating product', error: err });
-  }
-});
+    try {
+      const { name, description, price, category, stock, userId } = req.body;
+  
+      if (!userId) {
+        return res.status(400).json({ message: 'User ID is required' });
+      }
+  
+      // Connection to User
+      const product = new Product({
+        name,
+        description,
+        price,
+        category,
+        stock,
+        user: userId,  // userId to conn
+      });
+  
+      const savedProduct = await product.save();
+      res.status(201).json(savedProduct);
+    } catch (err) {
+      res.status(400).json({ message: 'Error creating product', error: err });
+    }
+  });
+  
 
 // GET /api/products/:id
-router.get('/:id', async (req: Request<{ id: string }>, res: Response) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+router.get('/', async (req: Request, res: Response) => {
+    try {
+      const products = await Product.find().populate('user', 'name email'); // Username?
+      res.json(products);
+    } catch (err) {
+      res.status(500).json({ message: 'Error fetching products', error: err });
     }
-    res.json(product);
-  } catch (err) {
-    res.status(500).json({ message: 'Error fetching product', error: err });
-  }
-});
+  });
 
 // PUT /api/products/:id
 router.put('/:id', async (req: Request<{ id: string }>, res: Response) => {
