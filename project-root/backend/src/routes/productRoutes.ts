@@ -1,3 +1,5 @@
+// backend/src/routes/productRoutes.ts
+
 import express, { Request, Response } from 'express';
 import Product from '../models/Product';
 import { IUser } from '../models/User';
@@ -8,16 +10,32 @@ const router = express.Router();
  * @swagger
  * /api/products:
  *   get:
- *     summary: Get all products
+ *     summary: Get all products or filter by category
+ *     parameters:
+ *       - in: query
+ *         name: category
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Filter products by category
  *     responses:
  *       200:
  *         description: List of products
  */
 
+
 // GET /api/products
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const products = await Product.find();
+    const { category } = req.query;
+
+    let products;
+    if (category) {
+      products = await Product.find({ category: category });
+    } else {
+      products = await Product.find();
+    }
+
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching products', error: err });
