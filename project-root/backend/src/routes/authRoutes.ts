@@ -6,6 +6,11 @@ import User from '../models/User';
 
 const router = express.Router();
 
+const generateToken = (userId: string, role: string) => {
+    return jwt.sign({ userId, role }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+  };
+  
+
 // POST /api/auth/register
 router.post('/register', async (req: Request, res: Response) => {
   const { name, email, password, role } = req.body;
@@ -21,7 +26,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
     const savedUser = await newUser.save();
 
-    const token = jwt.sign({ userId: savedUser._id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+    const token = generateToken(savedUser._id.toString(), savedUser.role);
 
     res.status(201).json({ token, user: { id: savedUser._id, name: savedUser.name, email: savedUser.email, role: savedUser.role } });
   } catch (err) {
@@ -44,9 +49,11 @@ router.post('/login', async (req: Request, res: Response) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
-
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    const token = generateToken(user._id.toString(), user.role);
+    res.json({
+        token,
+        user: { id: user._id, name: user.name, email: user.email, role: user.role },
+      });
   } catch (err) {
     res.status(500).json({ message: 'Error logging in', error: err });
   }

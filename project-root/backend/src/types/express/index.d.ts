@@ -1,4 +1,4 @@
-// src/types/index.d.ts
+// src/types/express/index.d.ts
 import { IUserPayload } from '../../middlewares/authMiddleware';
 import { Role } from '../models/User'; 
 

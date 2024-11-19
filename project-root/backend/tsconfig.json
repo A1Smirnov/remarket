@@ -1,15 +1,15 @@
 {
-    "compilerOptions": {
-      "target": "ES2023",
-      "lib": ["ES2023"],
-      "module": "CommonJS",
-      "rootDir": "src",
-      "outDir": "dist",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true
-    },
-    "include": ["src"],
-    "exclude": ["node_modules"]
-  }
-  
+  "compilerOptions": {
+    "typeRoots": ["src/types", "node_modules/@types"],
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "CommonJS",
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

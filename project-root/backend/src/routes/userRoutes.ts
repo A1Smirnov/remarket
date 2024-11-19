@@ -4,7 +4,7 @@
 
 import express, { Request, Response } from 'express';
 import User from '../models/User';
-import { protect } from '../middlewares/authMiddleware';
+import { protect, authorize } from '../middlewares/authMiddleware';
 import { body, validationResult } from 'express-validator';
 
 const router = express.Router();
@@ -20,12 +20,27 @@ const router = express.Router();
  */
 
 // GET /api/users
-router.get('/', async (req: Request, res: Response) => {
+// !!! ADMIN ONLY !!!
+router.get('/', protect, authorize('admin'), async (req: Request, res: Response) => {
   try {
     const users = await User.find().select('-password');
     res.json(users);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching users', error: err });
+  }
+});
+
+// GET /api/users/:id
+// !!! AUTH USERS ONLY
+router.get('/:id', protect, async (req: Request<{ id: string }>, res: Response) => {
+  try {
+    const user = await User.findById(req.params.id).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching user', error: err });
   }
 });
 
@@ -101,7 +116,8 @@ router.put(
 );
 
 // DELETE /api/users/:id
-router.delete('/:id', async (req: Request<{ id: string }>, res: Response) => {
+// ADMIN ONLY
+router.delete('/:id', protect, authorize('admin'), async (req: Request<{ id: string }>, res: Response) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {

@@ -1,15 +1,18 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, ObjectId } from 'mongoose';
+
+export type Role = 'user' | 'admin';
 
 export interface IUser extends Document {
+  _id: ObjectId;
   name: string;
   email: string;
   password: string;
-  role: string;
+  role: Role;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const UserSchema: Schema = new Schema(
+const UserSchema: Schema<IUser> = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
