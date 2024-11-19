@@ -17,7 +17,10 @@ const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [category, setCategory] = useState<string>('');
+    const [category] = useState<string>('');
+
+    // Out of here i have deleted "setCategory" to avoid errors:
+    // const [category, setCategory] = useState<string>('');
     
     const [filterCategory, setFilterCategory] = useState<string>('');
     const [sortOption, setSortOption] = useState<string>('popularity');
