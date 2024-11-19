@@ -28,7 +28,7 @@ const swaggerOptions = {
       description: 'API documentation',
     },
   },
-  apis: ['./src/routes/productRoutes.ts', './src/routes/userRoutes.ts'],
+  apis: ['./src/routes/productRoutes.ts', './src/routes/userRoutes.ts', './src/routes/authRoutes.ts'],
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
@@ -36,7 +36,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 app.use(express.json());
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
