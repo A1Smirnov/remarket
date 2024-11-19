@@ -17,16 +17,16 @@ const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [category, setCategory] = useState<string>(''); // Для запроса на бэкенд с категорией
+    const [category, setCategory] = useState<string>('');
     
-    const [filterCategory, setFilterCategory] = useState<string>(''); // Локальный фильтр по категории
-    const [sortOption, setSortOption] = useState<string>('popularity'); // Сортировка (по умолчанию популярность)
+    const [filterCategory, setFilterCategory] = useState<string>('');
+    const [sortOption, setSortOption] = useState<string>('popularity');
   
     useEffect(() => {
       const fetchProducts = async () => {
         try {
           const response = await axios.get('http://localhost:5000/api/products', {
-            params: { category } // Параметры запроса с категорией
+            params: { category } 
           });
           setProducts(response.data);
           setLoading(false);
@@ -37,7 +37,7 @@ const Products: React.FC = () => {
       };
   
       fetchProducts();
-    }, [category]); // При изменении категории обновляется список продуктов
+    }, [category]); 
   
     // Применяем фильтрацию по категориям
     const filteredProducts = products.filter((product) =>

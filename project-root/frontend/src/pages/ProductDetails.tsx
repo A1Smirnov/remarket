@@ -1,3 +1,5 @@
+// frontend/src/pages/ProductDetails.tsx
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -21,7 +23,7 @@ const ProductDetails: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/api/products/${id}`);
+        const response = await axios.get(`http://localhost:5000/api/products/${id}`);
         setProduct(response.data);
         setLoading(false);
       } catch (err) {
