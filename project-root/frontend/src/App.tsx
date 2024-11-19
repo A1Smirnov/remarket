@@ -5,10 +5,12 @@ import Login from './pages/Login';
 import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 import Layout from './components/Layout';
+import Navbar from './components/Navbar';
 
 const App: React.FC = () => {
   return (
     <Router>
+      <Navbar />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
