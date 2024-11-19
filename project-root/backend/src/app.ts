@@ -30,8 +30,8 @@ const swaggerOptions = {
   apis: ['./src/routes/productRoutes.ts', './src/routes/userRoutes.ts'],
 };
 
-const swaggerSpec = swaggerJSDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 // Middleware
@@ -61,4 +61,5 @@ connectDB();
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  console.log('Swagger UI available at http://localhost:5000/api-docs');
 });
