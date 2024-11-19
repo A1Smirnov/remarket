@@ -4,6 +4,16 @@ import { IUser } from '../models/User';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /api/products:
+ *   get:
+ *     summary: Get all products
+ *     responses:
+ *       200:
+ *         description: List of products
+ */
+
 // GET /api/products
 router.get('/', async (req: Request, res: Response) => {
   try {
