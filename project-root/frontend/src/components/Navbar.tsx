@@ -1,12 +1,22 @@
+// frontend/src/components/Navbar.tsx
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const isAuthenticated = Boolean(localStorage.getItem('token'));
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   return (
@@ -18,7 +28,19 @@ const Navbar: React.FC = () => {
         <Link to="/products">Products</Link>
         <Link to="/categories">Categories</Link>
         <Link to="/cart">Cart</Link>
-        <Link to="/profile">Profile</Link>
+        {isAuthenticated ? (
+          <>
+            <Link to="/profile">Profile</Link>
+            <button className="navbar__logout" onClick={handleLogout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
       </div>
       <div className="navbar__burger" onClick={toggleMobileMenu}>
         <span className="navbar__burger-line"></span>
@@ -30,3 +52,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+

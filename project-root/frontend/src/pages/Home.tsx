@@ -1,3 +1,5 @@
+// frontend/src/pages/Home.tsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
@@ -18,7 +20,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="homepage">
       <header className="homepage__header">
-        <h1>Welcome to Marketplace</h1>
+        <h1>Welcome to REMarket</h1>
         <p>Find everything you need in one place!</p>
         <Link to="/products" className="homepage__cta">
           Shop Now
