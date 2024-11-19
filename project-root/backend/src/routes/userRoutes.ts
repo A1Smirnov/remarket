@@ -1,3 +1,7 @@
+// src/routes/userRoutes.ts
+
+// Need to make authorization routes on /auth/
+
 import express, { Request, Response } from 'express';
 import User from '../models/User';
 import { protect } from '../middlewares/authMiddleware';

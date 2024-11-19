@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes';
 import errorHandler from './middlewares/errorMiddleware';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import authRoutes from './routes/authRoutes';
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use(errorHandler); // LAST!
 
