@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -14,9 +14,37 @@ import {
   Box,
 } from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import axios from 'axios';
+
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+}
 
 const Home: React.FC = () => {
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProducts(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load products');
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <>
@@ -56,22 +84,20 @@ const Home: React.FC = () => {
         {/* Product Cards Section */}
         <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {products.map((product) => (
+              <Grid item key={product._id} xs={12} sm={6} md={4}>
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                   <CardMedia
                     component="img"
                     sx={{ pt: '56.25%' }} // 16:9
-                    image={`https://source.unsplash.com/random?sig=${card}`}
-                    alt="random"
+                    image={product.imageUrl}
+                    alt={product.name}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Product {card}
+                      {product.name}
                     </Typography>
-                    <Typography>
-                      This is a description of the product. Add details here to entice buyers!
-                    </Typography>
+                    <Typography>${product.price.toFixed(2)}</Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">

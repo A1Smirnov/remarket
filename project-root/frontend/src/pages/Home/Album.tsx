@@ -1,6 +1,6 @@
 // frontend/src/pages/Home/Album.tsx
 
-import React from 'react';
+// import React from 'react';
 import {
   AppBar,
   Button,
