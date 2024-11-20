@@ -1,4 +1,4 @@
-// frontend/src/pages/Register.tsx
+// frontend/src/pages/Auth/Register.tsx
 
 import React, { useState } from 'react';
 import axios from 'axios';

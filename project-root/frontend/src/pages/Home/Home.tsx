@@ -1,3 +1,5 @@
+// frontend/src/page/Home/Home.tsx
+
 import React, { useEffect, useState } from 'react';
 import {
   AppBar,
@@ -13,7 +15,7 @@ import {
   CssBaseline,
   Box,
 } from '@mui/material';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 interface Product {
@@ -51,24 +53,35 @@ const Home: React.FC = () => {
       <CssBaseline />
       <main>
         {/* Hero Section */}
-        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6 }}>
+        <Box
+          sx={{
+            bgcolor: 'background.paper',
+            pt: 8,
+            pb: 6,
+            animation: 'fadeIn 1s ease-out', // Добавление анимации
+          }}
+        >
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
-              Welcome to REMarket
+              Welcome to REMarket!
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Discover our curated selection of the best products. Shop now for exclusive deals!
+              First Marketplace that driven by AI
             </Typography>
             <Grid container spacing={2} justifyContent="center" sx={{ mt: 4 }}>
               <Grid item>
-                <Button variant="contained" color="primary">
-                  Shop Now
-                </Button>
+                <Link to="/products">
+                  <Button variant="contained" color="primary">
+                    Shop Now
+                  </Button>
+                </Link>
               </Grid>
               <Grid item>
-                <Button variant="outlined" color="primary">
-                  Learn More
-                </Button>
+                <Link to="/about">
+                  <Button variant="outlined" color="primary">
+                    Learn More
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Container>
@@ -105,9 +118,9 @@ const Home: React.FC = () => {
           </Grid>
         </Container>
       </main>
-
     </>
   );
 };
 
 export default Home;
+
