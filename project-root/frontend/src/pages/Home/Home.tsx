@@ -49,14 +49,6 @@ const Home: React.FC = () => {
   return (
     <>
       <CssBaseline />
-      <AppBar position="relative" color="primary">
-        <Toolbar>
-          <PhotoCameraIcon sx={{ marginRight: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap>
-            REMarket
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <main>
         {/* Hero Section */}
         <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6 }}>
@@ -113,20 +105,7 @@ const Home: React.FC = () => {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Thank you for visiting REMarket!
-        </Typography>
-      </Box>
+
     </>
   );
 };

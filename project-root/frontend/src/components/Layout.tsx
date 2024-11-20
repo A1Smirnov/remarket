@@ -1,22 +1,20 @@
 // frontend/src/components/Layout.tsx
 
 import React from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div>
-      <header>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/products">Products</Link></li>
-            <li><Link to="/login">Login</Link></li>
-          </ul>
-        </nav>
-      </header>
-      <main>{children}</main>
-    </div>
+    <Box display="flex" flexDirection="column" minHeight="100vh">
+      <Navbar />
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        {children}
+      </Box>
+      <Footer />
+    </Box>
   );
 };
 
