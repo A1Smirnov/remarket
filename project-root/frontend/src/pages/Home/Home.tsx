@@ -1,60 +1,108 @@
-// frontend/src/pages/Home.tsx
-
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Button,
+  CssBaseline,
+  Box,
+} from '@mui/material';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
-const HomePage: React.FC = () => {
-  const categories = [
-    { name: 'Electronics', link: '/categories/electronics', image: '/assets/electronics.jpg' },
-    { name: 'Fashion', link: '/categories/fashion', image: '/assets/fashion.jpg' },
-    { name: 'Home & Kitchen', link: '/categories/home-kitchen', image: '/assets/home-kitchen.jpg' },
-  ];
-
-  const popularProducts = [
-    { name: 'Smartphone', price: '$699', image: '/assets/smartphone.jpg' },
-    { name: 'Headphones', price: '$199', image: '/assets/headphones.jpg' },
-    { name: 'Coffee Maker', price: '$99', image: '/assets/coffee-maker.jpg' },
-  ];
+const Home: React.FC = () => {
+  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <div className="homepage">
-      <header className="homepage__header">
-        <h1>Welcome to REMarket</h1>
-        <p>Find everything you need in one place!</p>
-        <Link to="/products" className="homepage__cta">
-          Shop Now
-        </Link>
-      </header>
-
-      <section className="homepage__categories">
-        <h2>Popular Categories</h2>
-        <div className="categories__grid">
-          {categories.map((category) => (
-            <Link to={category.link} key={category.name} className="category__card">
-              <img src={category.image} alt={category.name} />
-              <div className="category__name">{category.name}</div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="homepage__popular-products">
-        <h2>Popular Products</h2>
-        <div className="products__grid">
-          {popularProducts.map((product) => (
-            <div key={product.name} className="product__card">
-              <img src={product.image} alt={product.name} />
-              <div className="product__info">
-                <div className="product__name">{product.name}</div>
-                <div className="product__price">{product.price}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+    <>
+      <CssBaseline />
+      <AppBar position="relative" color="primary">
+        <Toolbar>
+          <PhotoCameraIcon sx={{ marginRight: 2 }} />
+          <Typography variant="h6" color="inherit" noWrap>
+            REMarket
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <main>
+        {/* Hero Section */}
+        <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6 }}>
+          <Container maxWidth="sm">
+            <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
+              Welcome to REMarket
+            </Typography>
+            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+              Discover our curated selection of the best products. Shop now for exclusive deals!
+            </Typography>
+            <Grid container spacing={2} justifyContent="center" sx={{ mt: 4 }}>
+              <Grid item>
+                <Button variant="contained" color="primary">
+                  Shop Now
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="outlined" color="primary">
+                  Learn More
+                </Button>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+        {/* Product Cards Section */}
+        <Container sx={{ py: 8 }} maxWidth="md">
+          <Grid container spacing={4}>
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <CardMedia
+                    component="img"
+                    sx={{ pt: '56.25%' }} // 16:9
+                    image={`https://source.unsplash.com/random?sig=${card}`}
+                    alt="random"
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Product {card}
+                    </Typography>
+                    <Typography>
+                      This is a description of the product. Add details here to entice buyers!
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                    <Button size="small" color="primary">
+                      Buy
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </main>
+      {/* Footer */}
+      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          component="p"
+        >
+          Thank you for visiting REMarket!
+        </Typography>
+      </Box>
+    </>
   );
 };
 
-export default HomePage;
+export default Home;
