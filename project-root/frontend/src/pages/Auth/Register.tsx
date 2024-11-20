@@ -29,8 +29,7 @@ const SubmitButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Register() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -39,7 +38,7 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', { firstName, lastName, email, password });
+      const response = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
       navigate('/login');
     } catch (err) {
       setError('Registration failed');
@@ -59,31 +58,18 @@ export default function Register() {
         {error && <Typography color="error">{error}</Typography>}
         <Form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                autoComplete="fname"
+                id="name"
+                label="Name"
+                name="name"
+                autoComplete="name"
                 autoFocus
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
