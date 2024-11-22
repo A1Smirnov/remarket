@@ -36,12 +36,22 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(''); // Сброс ошибки перед новой попыткой
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      
+      // Сохранение токена и userId в localStorage
       localStorage.setItem('token', response.data.token);
-      navigate('/profile');
+      localStorage.setItem('userId', response.data.user.id);
+
+      navigate('/profile'); // Переход на страницу профиля
     } catch (err) {
-      setError('Invalid email or password');
+      // Проверка типа ошибки
+      if (axios.isAxiosError(err) && err.response) {
+        setError(err.response.data.message || 'Invalid email or password');
+      } else {
+        setError('Something went wrong. Please try again later.');
+      }
     }
   };
 
@@ -55,7 +65,11 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        {error && <Typography color="error">{error}</Typography>}
+        {error && (
+          <Typography color="error" sx={{ mt: 2 }}>
+            {error}
+          </Typography>
+        )}
         <Form noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -103,3 +117,4 @@ export default function Login() {
     </Container>
   );
 }
+

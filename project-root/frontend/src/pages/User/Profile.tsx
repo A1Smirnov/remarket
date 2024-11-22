@@ -31,14 +31,14 @@ const ProfileButton = styled(Button)(({ theme }) => ({
 const InfoContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-start', // Align text to the left
+  alignItems: 'flex-start',
   width: '100%',
   marginBottom: theme.spacing(2),
 }));
 
 const InfoItem = styled(Box)(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'space-between', // To align the labels and data in a row
+  justifyContent: 'space-between',
   width: '100%',
   marginBottom: theme.spacing(1),
 }));
@@ -62,9 +62,17 @@ export default function Profile() {
           setName(response.data.name);
           setEmail(response.data.email);
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            // Токен недействителен или истёк
+            localStorage.removeItem('token');
+            navigate('/login'); // Редирект на страницу логина
+          } else {
+            console.error('Error fetching profile:', error);
+          }
+        });
     } else {
-      navigate('/login');
+      navigate('/login'); // Если токена нет, перенаправляем на логин
     }
   }, [navigate]);
 
@@ -98,9 +106,7 @@ export default function Profile() {
     <Container maxWidth="xs">
       <CssBaseline />
       <ProfileContainer>
-        <AvatarStyled>
-          {/* Здесь можно добавить изображение или иконку */}
-        </AvatarStyled>
+        <AvatarStyled />
         <Typography component="h1" variant="h5" gutterBottom>
           Profile
         </Typography>
@@ -155,3 +161,4 @@ export default function Profile() {
     </Container>
   );
 }
+

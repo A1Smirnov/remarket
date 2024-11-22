@@ -27,11 +27,10 @@ const Navbar: React.FC = () => {
     ...(isAuthenticated
       ? [
           { text: 'Profile', path: '/profile' },
-          { text: 'Logout', action: handleLogout },
+          { text: 'Logout', action: handleLogout }, // Кнопка Logout только для авторизованных пользователей
         ]
       : [
           { text: 'Login', path: '/login' },
-          // { text: 'Register', path: '/register' },
         ]),
   ];
 
@@ -46,7 +45,7 @@ const Navbar: React.FC = () => {
         </Typography>
         <div>
           {menuItems
-            .filter((item) => !item.action) // Only items with a `path`
+            .filter((item) => !item.action) // Только элементы с `path`, без `action`
             .map((item) => (
               <Button key={item.text} color="inherit" component={Link} to={item.path}>
                 {item.text}
@@ -59,9 +58,9 @@ const Navbar: React.FC = () => {
           {menuItems.map((item) => (
             <ListItemButton
               key={item.text}
-              onClick={item.action ? item.action : toggleDrawer}
+              onClick={item.action ? item.action : toggleDrawer} // Если есть `action`, то выполняем его
               component={item.path ? Link : 'button'}
-              {...(item.path ? { to: item.path } : {})} // Передаём `to` только если `item.path` существует
+              {...(item.path ? { to: item.path } : {})} // Передаем `to` только если есть путь
             >
               <ListItemText primary={item.text} />
             </ListItemButton>
@@ -73,4 +72,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
 

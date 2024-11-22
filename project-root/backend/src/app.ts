@@ -10,12 +10,14 @@ import errorHandler from './middlewares/errorMiddleware';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import authRoutes from './routes/authRoutes';
+import cartRoutes from './routes/cartRoutes';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const ATLAS_URI = process.env.ATLAS_URI || ''; // Изменили на ATLAS_URI
+
 
 // !!! SWAGGER !!!
 
@@ -45,7 +47,7 @@ app.use(express.json());
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
-
+app.use('/api/cart', cartRoutes);
 app.use(errorHandler); // LAST!
 
 app.get('/', (req, res) => {
