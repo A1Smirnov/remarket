@@ -29,6 +29,7 @@ const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -42,7 +43,18 @@ const Home: React.FC = () => {
       }
     };
 
+    const fetchBackgroundImage = async () => {
+      try {
+        const unsplashResponse = await axios.get('http://localhost:5000/api/unsplash/random-photos');
+        console.log(unsplashResponse.data);  // 
+        setBackgroundImage(unsplashResponse.data.urls.regular);
+      } catch (err) {
+        console.error('Failed to fetch background image', err);
+      }
+    };
+
     fetchProducts();
+    fetchBackgroundImage();
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -52,20 +64,22 @@ const Home: React.FC = () => {
     <>
       <CssBaseline />
       <main>
-        {/* Hero Section */}
         <Box
           sx={{
-            bgcolor: 'background.paper',
             pt: 8,
             pb: 6,
-            animation: 'fadeIn 1s ease-out', // Добавление анимации
+            animation: 'fadeIn 1s ease-out',
+            backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            color: 'white',
           }}
         >
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
+            <Typography component="h1" variant="h2" align="center" gutterBottom>
               Welcome to REMarket!
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            <Typography variant="h5" align="center" paragraph>
               First Marketplace that driven by AI
             </Typography>
             <Grid container spacing={2} justifyContent="center" sx={{ mt: 4 }}>
@@ -86,7 +100,6 @@ const Home: React.FC = () => {
             </Grid>
           </Container>
         </Box>
-        {/* Product Cards Section */}
         <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
             {products.map((product) => (
@@ -94,7 +107,7 @@ const Home: React.FC = () => {
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                   <CardMedia
                     component="img"
-                    sx={{ pt: '56.25%' }} // 16:9
+                    sx={{ pt: '56.25%' }}
                     image={product.imageUrl}
                     alt={product.name}
                   />
@@ -123,4 +136,6 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
 

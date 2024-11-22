@@ -11,6 +11,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import authRoutes from './routes/authRoutes';
 import cartRoutes from './routes/cartRoutes';
+import unsplashRoutes from './routes/unsplashRoutes';
 
 dotenv.config();
 
@@ -48,6 +49,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/unsplash', unsplashRoutes);
 app.use(errorHandler); // LAST!
 
 app.get('/', (req, res) => {
