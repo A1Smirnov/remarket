@@ -10,11 +10,9 @@ import Layout from './components/Layout';
 // import Navbar from './components/Navbar';
 import Products from './pages/Products/Products';
 import ProductDetails from './pages/Products/ProductDetails';
-// MUI
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme/theme';
-
 import { CartProvider } from './pages/context/CartContext';
 import Cart from './pages/User/Cart';  // Импортируем компонент корзины
 
@@ -22,7 +20,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* Оборачиваем весь роутинг и компоненты в CartProvider */}
+      {/* CartProvider */}
       <CartProvider>
         <Router>
           <Layout>
@@ -34,7 +32,7 @@ const App: React.FC = () => {
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetails />} />
               <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
-              <Route path="/cart" element={<Cart />} />  {/* Добавляем маршрут для корзины */}
+              <Route path="/cart" element={<Cart />} />  {/* Route for cart */}
             </Routes>
           </Layout>
         </Router>
