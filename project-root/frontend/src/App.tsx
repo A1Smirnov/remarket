@@ -14,7 +14,12 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme/theme';
 import { CartProvider } from './pages/context/CartContext';
-import Cart from './pages/User/Cart';  // Импортируем компонент корзины
+import Cart from './pages/User/Cart';
+
+import About from './pages/About/About'; // Импорт страницы About
+import Categories from './pages/Products/Categories'; // Импорт страницы Categories
+import Checkout from './pages/User/Checkout'; // Импорт страницы Checkout
+
 
 const App: React.FC = () => {
   return (
@@ -32,7 +37,10 @@ const App: React.FC = () => {
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetails />} />
               <Route path="/forgot-password" element={<div>Forgot Password Page</div>} />
-              <Route path="/cart" element={<Cart />} />  {/* Route for cart */}
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </Layout>
         </Router>
