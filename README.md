@@ -1,4 +1,4 @@
-# MERN E-Commerce Platform
+# REMarket - E-Commerce MERN Platform
 
 ## 📋 Project Overview
 This project is a fully functional e-commerce platform built with the MERN stack (MongoDB, Express, React, Node.js). It features user authentication, product browsing, a shopping cart, and a responsive design.
@@ -78,7 +78,7 @@ This project is a fully functional e-commerce platform built with the MERN stack
 - Enable multi-language support.
 
 ## 🛠️ Contact:
-Developer: **[Your Name]**  
-Email: example@example.com  
+Developer: Alexey Smirnov  
+https://www.linkedin.com/in/a1smirnov/
 
 Feel free to reach out for any questions or feedback! 🌟
