@@ -1,4 +1,3 @@
-```markdown
 # MERN E-Commerce Platform
 
 ## 📋 Project Overview
@@ -83,4 +82,3 @@ Developer: **[Your Name]**
 Email: example@example.com  
 
 Feel free to reach out for any questions or feedback! 🌟
-```
