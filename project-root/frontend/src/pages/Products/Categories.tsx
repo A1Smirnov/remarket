@@ -12,7 +12,7 @@ const Categories = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 5 }}>
       <Typography variant="h3" align="center" gutterBottom>
-        Категории продуктов
+        Products Categories
       </Typography>
       <Grid container spacing={4}>
         {categories.map((category) => (

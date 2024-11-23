@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import {
-  AppBar,
-  Toolbar,
-  Typography,
+  CssBaseline,
   Container,
   Grid,
   Card,
@@ -12,16 +10,18 @@ import {
   CardMedia,
   CardActions,
   Button,
-  CssBaseline,
+  Typography,
   Box,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 interface Product {
   _id: string;
   name: string;
   price: number;
+  category: string;
   imageUrl: string;
 }
 
@@ -30,6 +30,9 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+  const [addedToCartMessage, setAddedToCartMessage] = useState<string | null>(null);
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -46,7 +49,6 @@ const Home: React.FC = () => {
     const fetchBackgroundImage = async () => {
       try {
         const unsplashResponse = await axios.get('http://localhost:5000/api/unsplash/random-photos');
-        console.log(unsplashResponse.data);  // 
         setBackgroundImage(unsplashResponse.data.urls.regular);
       } catch (err) {
         console.error('Failed to fetch background image', err);
@@ -57,6 +59,13 @@ const Home: React.FC = () => {
     fetchBackgroundImage();
   }, []);
 
+  const handleAddToCart = (product: Product) => {
+    const cartItem = { ...product, quantity: 1 }; // Убедитесь, что добавленное свойство 'category' присутствует
+    addToCart(cartItem); 
+    setAddedToCartMessage(`Added ${product.name} to your cart!`);
+    setTimeout(() => setAddedToCartMessage(null), 3000);
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -64,6 +73,7 @@ const Home: React.FC = () => {
     <>
       <CssBaseline />
       <main>
+        {/* Hero Section */}
         <Box
           sx={{
             pt: 8,
@@ -80,7 +90,7 @@ const Home: React.FC = () => {
               Welcome to REMarket!
             </Typography>
             <Typography variant="h5" align="center" paragraph>
-              First Marketplace that driven by AI
+              First Marketplace driven by AI
             </Typography>
             <Grid container spacing={2} justifyContent="center" sx={{ mt: 4 }}>
               <Grid item>
@@ -92,14 +102,35 @@ const Home: React.FC = () => {
               </Grid>
               <Grid item>
                 <Link to="/about">
-                  <Button variant="outlined" color="primary">
-                    Learn More
+                  <Button variant="contained" color="secondary">
+                    About Us
                   </Button>
                 </Link>
               </Grid>
             </Grid>
           </Container>
         </Box>
+
+        {/* Notification for added to cart */}
+        {addedToCartMessage && (
+          <Box
+            sx={{
+              position: 'fixed',
+              top: '10px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              color: 'white',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              zIndex: 1000,
+            }}
+          >
+            {addedToCartMessage}
+          </Box>
+        )}
+
+        {/* Products Section */}
         <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
             {products.map((product) => (
@@ -107,21 +138,35 @@ const Home: React.FC = () => {
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                   <CardMedia
                     component="img"
-                    sx={{ pt: '56.25%' }}
+                    sx={{ pt: '10%' }}
                     image={product.imageUrl}
                     alt={product.name}
+                    onClick={() => window.location.href = `/products/${product._id}`}
+                    style={{ cursor: 'pointer' }}
                   />
-                  <CardContent sx={{ flexGrow: 1 }}>
+                  <CardContent
+                    sx={{ flexGrow: 1, textAlign: 'center', cursor: 'pointer' }}
+                    onClick={() => window.location.href = `/products/${product._id}`}
+                  >
                     <Typography gutterBottom variant="h5" component="h2">
                       {product.name}
                     </Typography>
                     <Typography>${product.price.toFixed(2)}</Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button
+                      size="small"
+                      color="primary"
+                      component={Link}
+                      to={`/products/${product._id}`}
+                    >
                       View
                     </Button>
-                    <Button size="small" color="primary">
+                    <Button
+                      size="small"
+                      color="primary"
+                      onClick={() => handleAddToCart(product)}
+                    >
                       Buy
                     </Button>
                   </CardActions>
@@ -136,6 +181,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-
 
