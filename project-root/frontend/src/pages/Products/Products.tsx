@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Button } from '@mui/material'; // Добавляем Button из MUI
 import './Products.css';
 import { useCart } from '../context/CartContext';
 
@@ -101,7 +102,19 @@ const Products: React.FC = () => {
               <h2>{product.name}</h2>
             </Link>
             <p>${product.price.toFixed(2)}</p>
-            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={() => handleAddToCart(product)}
+              sx={{
+                marginTop: '10px',
+                textTransform: 'none',
+                padding: '10px',
+              }}
+            >
+              Add to Cart
+            </Button>
           </div>
         ))}
       </div>
