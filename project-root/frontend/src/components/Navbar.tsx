@@ -40,10 +40,21 @@ const Navbar: React.FC = () => {
         <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer}>
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          REMarket
-        </Typography>
-        <div>
+
+        {/* Логотип */}
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <img
+            src="/images/Logo.png" // Путь к логотипу в папке public
+            alt="REMarket Logo"
+            style={{ width: '40px', height: '40px', marginRight: '10px' }}
+          />
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }}>
+            REMarket
+          </Typography>
+        </Link>
+
+        {/* Кнопки меню (выравнивание по правому краю) */}
+        <div style={{ marginLeft: 'auto' }}>
           {menuItems
             .filter((item) => !item.action) // Только элементы с `path`, без `action`
             .map((item) => (
@@ -53,6 +64,8 @@ const Navbar: React.FC = () => {
             ))}
         </div>
       </Toolbar>
+
+      {/* Мобильное меню */}
       <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer}>
         <List>
           {menuItems.map((item) => (
@@ -72,5 +85,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-
 
