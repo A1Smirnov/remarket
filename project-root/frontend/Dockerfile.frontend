@@ -1,0 +1,25 @@
+# 1. Используем Node.js для сборки фронтенда
+FROM node:18 AS build
+
+# 2. Устанавливаем рабочую директорию
+WORKDIR /app
+
+# 3. Копируем файлы для установки зависимостей
+COPY ./frontend/package*.json ./
+
+# 4. Устанавливаем зависимости
+RUN npm install
+
+# 5. Копируем остальной код и запускаем сборку
+COPY ./frontend .
+RUN npm run build
+
+# 6. Используем Nginx для сервировки статических файлов
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# 7. Открываем порт для Nginx
+EXPOSE 80
+
+# 8. Запускаем Nginx
+CMD ["nginx", "-g", "daemon off;"]
