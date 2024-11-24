@@ -1,11 +1,12 @@
 // frontend/src/pages/Products/Products.tsx
 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from '@mui/material'; // Добавляем Button из MUI
+import { Button } from '@mui/material';
 import './Products.css';
 import { useCart } from '../context/CartContext';
+import { Link } from "react-router-dom";
 
 interface Product {
   _id: string;
@@ -16,10 +17,11 @@ interface Product {
 }
 
 const Products: React.FC = () => {
+  const { category } = useParams<{ category: string }>();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [filterCategory, setFilterCategory] = useState<string>('');
+  const [filterCategory, setFilterCategory] = useState<string>(category || '');
   const [sortOption, setSortOption] = useState<string>('popularity');
   const [addedToCartMessage, setAddedToCartMessage] = useState<string | null>(null); 
   const { addToCart } = useCart(); 
@@ -28,7 +30,7 @@ const Products: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/products', {
-          params: { category: '' } 
+          params: { category: filterCategory }
         });
         setProducts(response.data);
         setLoading(false);
@@ -39,20 +41,16 @@ const Products: React.FC = () => {
     };
 
     fetchProducts();
-  }, []); 
+  }, [filterCategory]);
 
   const handleAddToCart = (product: Product) => {
-    const cartItem = { ...product, quantity: 1 };  // Добавляем поле quantity
+    const cartItem = { ...product, quantity: 1 };
     addToCart(cartItem);
     setAddedToCartMessage(`Added ${product.name} to your cart!`);
     setTimeout(() => setAddedToCartMessage(null), 3000);
   };
 
-  const filteredProducts = products.filter((product) =>
-    filterCategory ? product.category === filterCategory : true
-  );
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortedProducts = [...products].sort((a, b) => {
     if (sortOption === 'priceAsc') return a.price - b.price;
     if (sortOption === 'priceDesc') return b.price - a.price;
     return 0;
@@ -63,7 +61,7 @@ const Products: React.FC = () => {
 
   return (
     <div className="products-page">
-      <h1>All Products</h1>
+      <h1>{filterCategory ? `${filterCategory} Products` : 'All Products'}</h1>
       {addedToCartMessage && <div className="added-to-cart-message">{addedToCartMessage}</div>}
       <div className="filters">
         <div>
