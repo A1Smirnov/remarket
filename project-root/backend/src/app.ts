@@ -1,5 +1,6 @@
 // backend/src/app.ts
 
+// Ski-bi dibby dib yo da dub dub
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -14,14 +15,13 @@ import cartRoutes from './routes/cartRoutes';
 import unsplashRoutes from './routes/unsplashRoutes';
 
 dotenv.config();
-
+// Yo da dub dub
 const app = express();
 const PORT = process.env.PORT || 5000;
-const ATLAS_URI = process.env.ATLAS_URI || ''; // Изменили на ATLAS_URI
+const ATLAS_URI = process.env.ATLAS_URI || '';
 
 
 // !!! SWAGGER !!!
-
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -39,6 +39,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 // Middleware
+// Ba-da-ba-da-ba-be bop bop bodda bope
 app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -56,20 +57,24 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
+// Bop ba bodda bope
 const connectDB = async () => {
     try {
-      const conn = await mongoose.connect(ATLAS_URI); // Убрали параметры useNewUrlParser и useUnifiedTopology
+      const conn = await mongoose.connect(ATLAS_URI);
       console.log('MongoDB connected');
     } catch (error) {
       console.error('Error connecting to MongoDB:', error);
-      process.exit(1); // Если ошибка подключения, завершаем приложение
+      process.exit(1);
     }
   };
   
 
 connectDB();
 
+// Dibby dib yo da 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
   console.log('Swagger UI available at http://localhost:5000/api-docs');
 });
+
+// Bada bing bada boom

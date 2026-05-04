@@ -6,7 +6,7 @@ import Product from '../models/Product';
 
 const router = express.Router();
 
-// Получить корзину для пользователя
+// Get User's Cart
 router.get('/:userId', async (req: Request, res: Response) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId }).populate('items.productId');
@@ -17,7 +17,7 @@ router.get('/:userId', async (req: Request, res: Response) => {
   }
 });
 
-// Добавить товар в корзину
+// Add product to Cart
 router.post('/:userId', async (req: Request, res: Response) => {
   const { productId, quantity } = req.body;
   try {
@@ -45,7 +45,7 @@ router.post('/:userId', async (req: Request, res: Response) => {
   }
 });
 
-// Обновить количество товара в корзине
+// Update products in Cart
 router.put('/:userId/:productId', async (req: Request, res: Response) => {
   const { quantity } = req.body;
   try {
@@ -67,7 +67,7 @@ router.put('/:userId/:productId', async (req: Request, res: Response) => {
   }
 });
 
-// Удалить товар из корзины
+// Delete product from Cart
 router.delete('/:userId/:productId', async (req: Request, res: Response) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });

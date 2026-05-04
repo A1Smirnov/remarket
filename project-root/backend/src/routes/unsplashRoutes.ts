@@ -13,7 +13,7 @@ unsplashRoutes.get('/random-photos', async (req, res) => {
   try {
     const response = await axios.get('https://api.unsplash.com/photos/random', {
       headers: {
-        Authorization: `Client-ID ${API_KEY}`, // Ваш ключ API в заголовке
+        Authorization: `Client-ID ${API_KEY}`, // KEEEY API in Header
       },
       params: {
         query: 'shopping, store, marketplace',

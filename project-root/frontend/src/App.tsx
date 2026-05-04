@@ -1,5 +1,7 @@
 // frontend/src/App.tsx
 
+// Ski-bi dibby dib yo da dub dub!!!
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
@@ -15,10 +17,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme/theme';
 import { CartProvider } from './pages/context/CartContext';
 import Cart from './pages/User/Cart';
-
-import About from './pages/About/About'; // Импорт страницы About
-import Categories from './pages/Products/Categories'; // Импорт страницы Categories
-import Checkout from './pages/User/Checkout'; // Импорт страницы Checkout
+import About from './pages/About/About'; 
+import Categories from './pages/Products/Categories'; 
+import Checkout from './pages/User/Checkout';
 
 
 const App: React.FC = () => {
