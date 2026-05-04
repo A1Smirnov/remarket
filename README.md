@@ -58,41 +58,40 @@ http://localhost:5173
 
 ### Marketplace
 
-<div style="display: flex; justify-content: center; gap: 16px; align-items: flex-start;">
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+  <a href="screenshots/REMarket-Marketplace.png">
+    <img src="screenshots/REMarket-Marketplace.png" width="240" alt="Marketplace" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_category.png">
+    <img src="screenshots/REMarket-Marketplace_category.png" width="240" alt="Category view" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_products.png">
+    <img src="screenshots/REMarket-Marketplace_products.png" width="240" alt="Products page" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_product_card.png">
+    <img src="screenshots/REMarket-Marketplace_product_card.png" width="240" alt="Product card" />
+  </a>
+</div>
 
-  <!-- Left: Hero -->
-  <div>
-    <a href="screenshots/REMarket-Marketplace.png">
-      <img src="screenshots/REMarket-Marketplace.png"
-           alt="Marketplace overview"
-           width="420" />
-    </a>
-  </div>
+### Cart and Checkout
 
-  <!-- Right: Stack -->
-
-  <div style="display: flex; flex-direction: column; gap: 10px;">
-
-    <a href="screenshots/REMarket-Marketplace_category.png">
-      <img src="screenshots/REMarket-Marketplace_category.png"
-           alt="Category view"
-           width="320" />
-    </a>
-
-    <a href="screenshots/REMarket-Marketplace_products.png">
-      <img src="screenshots/REMarket-Marketplace_products.png"
-           alt="Products page"
-           width="320" />
-    </a>
-
-    <a href="screenshots/REMarket-Marketplace_product_card.png">
-      <img src="screenshots/REMarket-Marketplace_product_card.png"
-           alt="Product card"
-           width="320" />
-    </a>
-
-  </div>
-
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+  <a href="screenshots/REMarket-Marketplace_cart.png">
+    <img src="screenshots/REMarket-Marketplace_cart.png" width="240" alt="Cart" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_checkout1.png">
+    <img src="screenshots/REMarket-Marketplace_checkout1.png" width="240" alt="Checkout step 1" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_checkout2.png">
+    <img src="screenshots/REMarket-Marketplace_checkout2.png" width="240" alt="Checkout step 2" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_checkout3.png">
+    <img src="screenshots/REMarket-Marketplace_checkout3.png" width="240" alt="Checkout step 3" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_checkout4.png">
+    <img src="screenshots/REMarket-Marketplace_checkout4.png" width="240" alt="Checkout step 4" />
+  </a>
+</div>
 
 ### Authentication and Profile
 
