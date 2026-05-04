@@ -63,12 +63,11 @@ http://localhost:5173
 ### Marketplace
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-
-  <a href="screenshots/REMarket-Marketplace_category.png">
-    <img src="screenshots/REMarket-Marketplace_category.png" width="240" alt="Category view" />
-  </a>
   <a href="screenshots/REMarket-Marketplace_products.png">
     <img src="screenshots/REMarket-Marketplace_products.png" width="240" alt="Products page" />
+  </a>
+  <a href="screenshots/REMarket-Marketplace_category.png">
+    <img src="screenshots/REMarket-Marketplace_category.png" width="240" alt="Category view" />
   </a>
   <a href="screenshots/REMarket-Marketplace_product_card.png">
     <img src="screenshots/REMarket-Marketplace_product_card.png" width="240" alt="Product card" />
