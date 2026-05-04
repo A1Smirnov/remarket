@@ -3,6 +3,10 @@
 A full-stack MERN e-commerce platform built as a five-day practice project.  
 It includes user authentication, product browsing, cart and checkout flow, profile management, and a MongoDB-backed API.
 
+  <a href="screenshots/REMarket-Marketplace.png">
+    <img src="screenshots/REMarket-Marketplace.png" width="240" alt="Marketplace" />
+  </a>
+
 ## Overview
 
 REMarket is a working online store built with a separate React frontend and Node/Express backend.  
@@ -59,9 +63,7 @@ http://localhost:5173
 ### Marketplace
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-  <a href="screenshots/REMarket-Marketplace.png">
-    <img src="screenshots/REMarket-Marketplace.png" width="240" alt="Marketplace" />
-  </a>
+
   <a href="screenshots/REMarket-Marketplace_category.png">
     <img src="screenshots/REMarket-Marketplace_category.png" width="240" alt="Category view" />
   </a>
